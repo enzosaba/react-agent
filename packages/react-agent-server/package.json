@@ -1,11 +1,13 @@
 {
   "name": "react-agent-server",
-  "version": "1.0.0",
+  "version": "1.1.0-alpha.1",
   "description": "",
   "main": "./distribution/index.js",
   "scripts": {
-    "build": "babel source --out-dir distribution; ./node_modules/.bin/uglifyjs ./distribution/index.js -o ./distribution/index.min.js -c -m",
-    "prepublish": "npm run build"
+    "build": "babel source --out-dir distribution -s; uglifyjs ./distribution/index.js -o ./distribution/index.min.js -c -m",
+    "prepublish": "npm run build",
+    "preinstall": "echo pre reactserver path = $PATH",
+    "postinstall": "echo postreact reactserver path = $PATH; npm run build"
   },
   "repository": {
     "type": "git",

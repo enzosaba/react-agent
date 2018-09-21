@@ -3,7 +3,8 @@ import { log } from 'util';
 require('babel-polyfill');
 
 module.exports = (server, actions, database, logger = false, runs) => {
-
+  let CAZZONE=1000;
+  debugger;
   const socketio = require('socket.io');
   const io = socketio(server);
   const chalk = require('chalk');
@@ -39,6 +40,7 @@ module.exports = (server, actions, database, logger = false, runs) => {
   }, 3000);
 
   const runAction = (key, request, actionId, socketID, callback) => {
+    debugger;
     // Takes in msg and the logger parameter to console log the associated error if not false
     // or call the logger function on the error text if logger is a function.
     const logHelper = (msg, etc) => {
@@ -157,7 +159,7 @@ module.exports = (server, actions, database, logger = false, runs) => {
           callback({ key, response, actionId });
         }).catch(error => {
           if (logger) logHelper('actionReject');
-          callback({ key, actionError: `The action for ${key} rejected its promise.`, actionId })
+          callback({ key, actionError: error, actionId })
         });
       }
     } 
